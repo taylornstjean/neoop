@@ -6,7 +6,7 @@ Version: 0.2.2
 
 Last updated February 4th, 2023.
 
-[CHANGELOG](https://github.com/taylornstjean/neoop/blob/main/CHANGELOG.md)
+[CHANGELOG](https://github.com/taylornstjean/neoop/blob/master/CHANGELOG.md)
 
 ---
 
@@ -47,11 +47,15 @@ If you would like to contribute, please follow these simple instructions:
 
 __Clone the dev branch.__
 
-`git clone -b dev https://github.com/taylornstjean/neoop.git`
+`git clone https://github.com/taylornstjean/neoop.git`
+
+__Create a new branch with an appropriate name.__
+
+`git checkout -b <branch-name> master`
 
 Make edits while making sure the code on your system is up to date.
 
-While making modifications, record them in the [CHANGELOG](https://github.com/taylornstjean/neoop/blob/main/CHANGELOG.md) under [Unreleased] using the following categories:
+After making modifications, record them in CHANGELOG.md under [Unreleased] using the following categories:
 
 | Category | Description                                                                                                                                                                       |
 |----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -59,11 +63,13 @@ While making modifications, record them in the [CHANGELOG](https://github.com/ta
 | Changed  | List of any changes that don't fix any issues or bugs but may improve the program in some way (i.e. QOL, optimization updates, etc). Can also include any functionality removals. |
 | Added    | List of any new additions to the program.                                                                                                                                         |
 
-Commit messages should be one to three word descriptions of the most significant change made.
+__Commit to and push the new branch.__
 
-__Push to dev branch.__
+`git add *`
 
-`git push origin dev`
+`git commit -m <message>`
+
+`git push origin <branch-name>`
 
 Create a pull request when code is ready to be merged with the master branch.
 
