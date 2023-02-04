@@ -45,7 +45,7 @@ This program currently has limited functionality, more will be added as new vers
 
 If you would like to contribute, please follow these simple instructions:
 
-__Clone the dev branch.__
+__Clone the master branch.__
 
 `git clone https://github.com/taylornstjean/neoop.git`
 
@@ -53,7 +53,7 @@ __Create a new branch with an appropriate name.__
 
 `git checkout -b <branch-name> master`
 
-Make edits while making sure the code on your system is up to date.
+Make edits while making sure the code on your system is up to date (`git pull origin master` to update).
 
 After making modifications, record them in CHANGELOG.md under [Unreleased] using the following categories:
 
