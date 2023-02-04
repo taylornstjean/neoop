@@ -43,15 +43,15 @@ This program currently has limited functionality, more will be added as new vers
 
 ### Contributions
 
-If you would like to contribute, please follow these simple instructions to help everyone keep track of any changes made to the repo.
+If you would like to contribute, please follow these simple instructions:
 
-##### Clone the dev branch.
+__Clone the dev branch.__
 
 `git clone -b dev https://github.com/taylornstjean/neoop.git`
 
 Make edits while making sure the code on your system is up to date.
 
-After making modifications, record them in the [CHANGELOG](https://github.com/taylornstjean/neoop/blob/main/CHANGELOG.md) under [Unreleased] using the following categories:
+While making modifications, record them in the [CHANGELOG](https://github.com/taylornstjean/neoop/blob/main/CHANGELOG.md) under [Unreleased] using the following categories:
 
 | Category | Description                                                                                                                                                                       |
 |----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -59,11 +59,13 @@ After making modifications, record them in the [CHANGELOG](https://github.com/ta
 | Changed  | List of any changes that don't fix any issues or bugs but may improve the program in some way (i.e. QOL, optimization updates, etc). Can also include any functionality removals. |
 | Added    | List of any new additions to the program.                                                                                                                                         |
 
-##### Push to dev branch.
+Commit messages should be one to three word descriptions of the most significant change made.
 
-`git push`
+__Push to dev branch.__
 
-Create a pull request when code is ready to be merged with the main branch.
+`git push origin dev`
+
+Create a pull request when code is ready to be merged with the master branch.
 
 ---
 
