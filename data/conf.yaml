@@ -1,0 +1,9 @@
+data:
+  mcp_neocp_url: "https://www.minorplanetcenter.net/Extended_Files/neocp.json"
+observatory:
+  long: -105.8194667
+  lat: 32.7795337
+  min_alt: 27
+  obs_time: 14
+  time_incr: 256
+keys: ["Temp_Desig", "Score", "Discovery_year", "Discovery_month", "Discovery_day", "R.A.", "Decl.", "V", "Updated", "NObs", "Arc", "H", "Not_Seen_dys", "Vis."]
