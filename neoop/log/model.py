@@ -1,7 +1,7 @@
 import os
-from config import LOG_DIR
 from datetime import datetime as dt
 
+from config import LOG_DIR
 
 neocp_log_path = os.path.join(LOG_DIR, "neocp.log")
 
@@ -33,4 +33,3 @@ def neocp_log_save():
     with open(neocp_log_path, "a") as f:
         entry = f"{dt.utcnow().timestamp()}\n"
         f.write(entry)
-

@@ -1,7 +1,9 @@
-from datetime import datetime as dt
-from texttable import Texttable
-from config import __version__, last_update
 import os
+from datetime import datetime as dt
+
+from texttable import Texttable
+
+from config import __version__, last_update
 
 
 def version():
@@ -34,7 +36,7 @@ def wrn_out(string):
 def table_out(data, outfile):
     table = Texttable(max_width=200)
     table.set_deco(Texttable.HEADER | Texttable.BORDER)
-    table.add_rows([data[0].keys()]+[entry.values() for entry in data])
+    table.add_rows([data[0].keys()] + [entry.values() for entry in data])
 
     if not outfile:
         print("\n\n", table.draw(), "\n")

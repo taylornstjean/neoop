@@ -4,7 +4,17 @@ All notable changes to this project will be documented in this file (beginning w
 
 ## [Unreleased]
 
-Nothing to see yet.
+### Fixed
+
+ - Fixed a few code formatting errors.
+
+### Added
+
+ - `-d, --desig` can now take multiple arguments to specify more than one NEO at a time.
+
+### Changed
+
+ - Updated .gitignore to include pycache and program generated files.
 
 ## [0.2.2 HOTFIX] - 2023-02-04
 
@@ -15,7 +25,7 @@ Nothing to see yet.
 ### Changed
 
  - Moved array column names to conf YAML file to fix function call order issue.
- - Renamed changelog.md to CHANGELOG.md
+ - Renamed changelog.md to CHANGELOG.md.
 
 ## [0.2.2] - 2023-02-03
 

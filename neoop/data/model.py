@@ -1,16 +1,17 @@
-import numpy as np
-from config import MPC_NEOCP_URL, DATA_DIR, OBS_COORDS, MIN_ALT, TIME_INCR, OBS_TIME
-from neoop.log import neocp_last_save, neocp_log_save
+import json
+import os
 from datetime import datetime as dt
 from urllib.request import urlretrieve
-import os
-import json
+
+import matplotlib.pyplot as plt
+import numpy as np
 from astropy import units as u
 from astropy.coordinates import EarthLocation, SkyCoord, AltAz
 from astropy.time import Time
-import matplotlib.pyplot as plt
-from neoop.interface import proc_out
 
+from config import MPC_NEOCP_URL, DATA_DIR, OBS_COORDS, MIN_ALT, TIME_INCR, OBS_TIME
+from neoop.interface import proc_out
+from neoop.log import neocp_last_save, neocp_log_save
 
 neocp_json_path = os.path.join(DATA_DIR, "neocp.json")
 neocp_npy_path = os.path.join(DATA_DIR, "neocp.npy")
@@ -92,21 +93,6 @@ def neocp_array(cols=None):
         return m_array
 
 
-def _is_visible(obj):
-
-    ascension = obj["R.A."] * u.hourangle
-    declination = obj["Decl."] * u.degree
-    date = Time(dt.utcnow())
-
-    altaz = AltAz(location=Obs().location, obstime=date)
-    radec = SkyCoord(ascension, declination, frame="icrs", unit=u.deg)
-    obj_obs = radec.transform_to(altaz)
-
-    obj_vis = "YES" if bool(obj_obs.alt >= MIN_ALT * u.degree) else "NO"
-
-    return obj_vis
-
-
 # object plotters
 
 def radec_plot(objects=neocp_array(), temp_desig=None):
@@ -115,13 +101,18 @@ def radec_plot(objects=neocp_array(), temp_desig=None):
     if temp_desig:
         ascensions = [obj["R.A."] * u.hourangle for obj in objects if obj["Temp_Desig"] in temp_desig]
         declinations = [obj["Decl."] * u.degree for obj in objects if obj["Temp_Desig"] in temp_desig]
+
+        if len(temp_desig) <= 1:
+            obj_desig = temp_desig
+        else:
+            obj_desig = "NEO"
     else:
         ascensions = [obj["R.A."] * u.hourangle for obj in objects]
         declinations = [obj["Decl."] * u.degree for obj in objects]
 
-    obj_desig = "NEO" if not temp_desig else temp_desig
+        obj_desig = "NEO"
 
-    proc_out(f"Generating right ascension/declination plot for object {temp_desig}.")
+    proc_out(f"Generating right ascension/declination plot for object(s) {temp_desig if temp_desig else 'ALL'}.")
 
     neo = SkyCoord(ascensions, declinations, frame='icrs', unit=u.deg)
     obs = SkyCoord(Obs().lst(), Obs().latitude, frame="icrs", unit=u.deg)
@@ -130,7 +121,7 @@ def radec_plot(objects=neocp_array(), temp_desig=None):
 
     plt.figure(figsize=(6, 5))
 
-    plt.suptitle("NEO Right Ascension/Declination Plot")
+    plt.suptitle(f"{obj_desig} Right Ascension/Declination Plot")
 
     plt.subplot(111, projection='mollweide')
     plt.grid(True)
@@ -146,17 +137,21 @@ def radec_plot(objects=neocp_array(), temp_desig=None):
 
 
 def altaz_plot(objects=neocp_array(), temp_desig=None):
-
     if temp_desig:
         ascensions = [obj["R.A."] * u.hourangle for obj in objects if obj["Temp_Desig"] in temp_desig]
         declinations = [obj["Decl."] * u.degree for obj in objects if obj["Temp_Desig"] in temp_desig]
+
+        if len(temp_desig) <= 1:
+            obj_desig = temp_desig
+        else:
+            obj_desig = "NEO"
     else:
         ascensions = [obj["R.A."] * u.hourangle for obj in objects]
         declinations = [obj["Decl."] * u.degree for obj in objects]
 
-    obj_desig = "NEO" if not temp_desig else temp_desig
+        obj_desig = "NEO"
 
-    proc_out(f"Generating altitude/azimuth plot for object {temp_desig}.")
+    proc_out(f"Generating altitude/azimuth plot for object(s) {temp_desig if temp_desig else 'ALL'}.")
 
     date = Time(dt.utcnow())
     time_grid = date + np.linspace(0, OBS_TIME, TIME_INCR) * u.hour
@@ -191,3 +186,17 @@ def altaz_plot(objects=neocp_array(), temp_desig=None):
 def is_neo(temp_desig, objects=neocp_array()):
     exist = bool(temp_desig in [obj["Temp_Desig"] for obj in objects])
     return exist
+
+
+def _is_visible(obj):
+    ascension = obj["R.A."] * u.hourangle
+    declination = obj["Decl."] * u.degree
+    date = Time(dt.utcnow())
+
+    altaz = AltAz(location=Obs().location, obstime=date)
+    radec = SkyCoord(ascension, declination, frame="icrs", unit=u.deg)
+    obj_obs = radec.transform_to(altaz)
+
+    obj_vis = "YES" if bool(obj_obs.alt >= MIN_ALT * u.degree) else "NO"
+
+    return obj_vis

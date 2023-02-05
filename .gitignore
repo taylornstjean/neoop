@@ -2,3 +2,12 @@
 
 # mac files
 .DS_Store
+
+# cache files
+__pycache__
+*.pyc
+
+# generated files
+neocp.npy
+neocp.json
+neocp.log

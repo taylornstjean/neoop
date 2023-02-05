@@ -1,4 +1,5 @@
 import os
+
 import yaml
 
 # metadata
@@ -14,17 +15,14 @@ LOG_DIR = os.path.join(BASE_DIR, "log")
 DATA_DIR = os.path.join(BASE_DIR, "data")
 DOCS_DIR = os.path.join(BASE_DIR, "docs")
 
-
 # load conf file
 
 with open(os.path.join(DATA_DIR, "conf.yaml"), "r") as f:
     CONF = yaml.safe_load(f)
 
-
 # data
 
 MPC_NEOCP_URL = CONF["data"]["mcp_neocp_url"]
-
 
 # observatory
 
